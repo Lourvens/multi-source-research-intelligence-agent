@@ -1,0 +1,41 @@
+# CPU-only installation requirements
+# IMPORTANT: Install PyTorch CPU-only FIRST using:
+# pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+# Then install this file: pip install -r requirements-cpu.txt
+
+# Core Framework
+langchain
+langchain-community
+langchain-openai
+
+# Vector Store
+chromadb
+
+# Embeddings (will use CPU-only PyTorch installed above)
+sentence-transformers
+
+# Data Sources
+arxiv
+
+# OpenAI
+openai
+
+# Utilities
+python-dotenv
+tiktoken
+pydantic
+
+# Processing
+beautifulsoup4
+requests
+
+# Development
+jupyter
+ipykernel
+
+# Testing
+pytest
+pytest-cov
+
+# Logging and Monitoring
+tqdm

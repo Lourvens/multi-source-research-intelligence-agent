@@ -1,0 +1,40 @@
+# Core Framework
+langchain
+langchain-community
+langchain-openai
+
+# Vector Store
+chromadb
+
+# Embeddings
+# NOTE: sentence-transformers will pull PyTorch. For CPU-only installation,
+# use requirements-cpu.txt instead, or install PyTorch CPU-first:
+# pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+sentence-transformers
+
+# Data Sources
+arxiv
+
+# OpenAI
+openai
+
+# Utilities
+python-dotenv
+tiktoken
+pydantic
+
+# Processing
+beautifulsoup4
+requests
+
+# Development
+jupyter
+ipykernel
+
+# Testing
+pytest
+pytest-cov
+
+# Logging and Monitoring
+tqdm
+pymupdf
