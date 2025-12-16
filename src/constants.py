@@ -7,12 +7,10 @@ the codebase, improving maintainability and reducing errors.
 
 from enum import Enum
 
-# Import ingestion constants for backward compatibility
-from src.ingestion.constant import (
-    ARXIV_DEFAULT_QUERY,
-    ARXIV_METADATA_SUBDIR,
-    ARXIV_PDF_SUBDIR,
-)
+# ArXiv ingestion constants
+ARXIV_DEFAULT_QUERY = "cat:cs.AI OR cat:cs.CL"
+ARXIV_METADATA_SUBDIR = "arxiv_metadata"
+ARXIV_PDF_SUBDIR = "arxiv_pdfs"
 
 
 class ChunkingStrategy(str, Enum):

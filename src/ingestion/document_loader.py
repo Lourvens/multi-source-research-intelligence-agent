@@ -12,8 +12,8 @@ from langchain_classic.schema import Document
 from src.utils.logging_config import setup_logging
 from src.ingestion.pdf_processor import PDFProcessor
 from src import config
-from src.ingestion.constant import ARXIV_METADATA_SUBDIR
 from src.constants import (
+    ARXIV_METADATA_SUBDIR,
     ContentType,
     CONTENT_TYPE_ABSTRACT_ONLY,
     CONTENT_TYPE_FULL_PAPER,

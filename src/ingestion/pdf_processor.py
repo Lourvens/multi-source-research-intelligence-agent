@@ -11,8 +11,12 @@ from langchain_classic.schema import Document
 
 from src.utils.logging_config import setup_logging
 from src import config
-from src.ingestion.constant import ARXIV_PDF_SUBDIR
-from src.constants import PDFLoaderType, PDF_LOADER_PYMUPDF, PDF_LOADER_PYPDF
+from src.constants import (
+    ARXIV_PDF_SUBDIR,
+    PDFLoaderType,
+    PDF_LOADER_PYMUPDF,
+    PDF_LOADER_PYPDF,
+)
 
 logger = setup_logging("pdf_processor", log_dir=Path("logs") / "ingestion")
 

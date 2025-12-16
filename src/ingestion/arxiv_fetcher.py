@@ -9,8 +9,12 @@ from src.utils.logging_config import setup_logging
 from src.utils.download import download_pdf
 from src import config
 from src.types.arxiv import ArxivMetadata
-from src.ingestion.constant import ARXIV_DEFAULT_QUERY, ARXIV_METADATA_SUBDIR, ARXIV_PDF_SUBDIR
-from src.constants import DATA_SOURCE_ARXIV
+from src.constants import (
+    ARXIV_DEFAULT_QUERY,
+    ARXIV_METADATA_SUBDIR,
+    ARXIV_PDF_SUBDIR,
+    DATA_SOURCE_ARXIV,
+)
 
 logger = setup_logging("arxiv_fetcher", log_dir=Path("logs") / "ingestion")
 
