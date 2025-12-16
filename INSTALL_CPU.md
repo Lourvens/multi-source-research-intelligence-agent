@@ -58,3 +58,4 @@ When you install `sentence-transformers` after PyTorch CPU-only is already insta
 - If you later need GPU support, you can uninstall PyTorch and reinstall with CUDA support
 
 
+
