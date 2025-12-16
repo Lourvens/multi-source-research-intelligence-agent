@@ -7,7 +7,12 @@ from langchain_classic.schema import Document
 from langchain_community.embeddings import HuggingFaceEmbeddings
 
 from src.utils.logging_config import setup_logging
-from src.constants import DEFAULT_EMBEDDING_MODEL, SENTENCE_TRANSFORMERS_PREFIX
+from src.constants import (
+    DEFAULT_EMBEDDING_MODEL,
+    SENTENCE_TRANSFORMERS_PREFIX,
+    DEFAULT_EMBEDDING_DEVICE,
+    DEFAULT_NORMALIZE_EMBEDDINGS,
+)
 from pathlib import Path
 
 logger = setup_logging("embedder", log_dir=Path("logs") / "embedding")
@@ -40,8 +45,8 @@ class DocumentEmbedder:
         try:
             self.embeddings = HuggingFaceEmbeddings(
                 model_name=model_name,
-                model_kwargs={"device": "cpu"},  # Use CPU by default
-                encode_kwargs={"normalize_embeddings": True}
+                model_kwargs={"device": DEFAULT_EMBEDDING_DEVICE},
+                encode_kwargs={"normalize_embeddings": DEFAULT_NORMALIZE_EMBEDDINGS}
             )
             logger.info("DocumentEmbedder initialized successfully")
         except Exception as exc:

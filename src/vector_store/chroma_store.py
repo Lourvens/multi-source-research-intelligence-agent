@@ -18,6 +18,8 @@ from src.constants import (
     DATA_SOURCE_ARXIV,
     DEFAULT_EMBEDDING_MODEL,
     SENTENCE_TRANSFORMERS_PREFIX,
+    DEFAULT_EMBEDDING_DEVICE,
+    DEFAULT_NORMALIZE_EMBEDDINGS,
 )
 
 logger = setup_logging("chroma_store", log_dir=Path("logs") / "vector_store")
@@ -62,8 +64,8 @@ class ChromaVectorStore:
         self.embedding_model = embedding_model
         self.embeddings = HuggingFaceEmbeddings(
             model_name=embedding_model,
-            model_kwargs={"device": "cpu"},
-            encode_kwargs={"normalize_embeddings": True}
+            model_kwargs={"device": DEFAULT_EMBEDDING_DEVICE},
+            encode_kwargs={"normalize_embeddings": DEFAULT_NORMALIZE_EMBEDDINGS}
         )
         
         self.vector_store: Optional[Chroma] = None
