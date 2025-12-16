@@ -7,6 +7,13 @@ the codebase, improving maintainability and reducing errors.
 
 from enum import Enum
 
+# Import ingestion constants for backward compatibility
+from src.ingestion.constant import (
+    ARXIV_DEFAULT_QUERY,
+    ARXIV_METADATA_SUBDIR,
+    ARXIV_PDF_SUBDIR,
+)
+
 
 class ChunkingStrategy(str, Enum):
     """Chunking strategies for document processing."""
@@ -50,4 +57,8 @@ DATA_SOURCE_ARXIV = DataSource.ARXIV.value
 DATA_SOURCE_PUBMED = DataSource.PUBMED.value
 DATA_SOURCE_NEWS = DataSource.NEWS.value
 DATA_SOURCE_PATENTS = DataSource.PATENTS.value
+
+# Subdirectory names for data organization
+PROCESSED_CHUNKS_SUBDIR = "chunks"
+PROCESSED_DOCUMENTS_SUBDIR = "documents"
 

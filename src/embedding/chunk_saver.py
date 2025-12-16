@@ -12,7 +12,7 @@ from langchain_classic.schema import Document
 
 from src import config
 from src.utils.logging_config import setup_logging
-from src.constants import DataSource, DATA_SOURCE_ARXIV
+from src.constants import DataSource, DATA_SOURCE_ARXIV, PROCESSED_CHUNKS_SUBDIR
 
 logger = setup_logging("chunk_saver", log_dir=Path("logs") / "embedding")
 
@@ -40,7 +40,7 @@ def save_processed_chunks(
         return None
     
     # Create output directory (in chunks subfolder)
-    output_dir = config.PROCESSED_DATA_DIR / source_str / "chunks"
+    output_dir = config.PROCESSED_DATA_DIR / source_str / PROCESSED_CHUNKS_SUBDIR
     output_dir.mkdir(parents=True, exist_ok=True)
     
     # Generate filename with timestamp

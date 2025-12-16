@@ -20,7 +20,8 @@ from src.constants import (
     DataSource,
     DATA_SOURCE_ARXIV,
     PDFLoaderType,
-    PDF_LOADER_PYMUPDF
+    PDF_LOADER_PYMUPDF,
+    PROCESSED_DOCUMENTS_SUBDIR,
 )
 
 logger = setup_logging("document_loader", log_dir=Path("logs") / "ingestion")
@@ -269,7 +270,7 @@ class DocumentLoader:
             return []
         
         # Create output directory
-        output_dir = config.PROCESSED_DATA_DIR / DATA_SOURCE_ARXIV / "documents"
+        output_dir = config.PROCESSED_DATA_DIR / DATA_SOURCE_ARXIV / PROCESSED_DOCUMENTS_SUBDIR
         output_dir.mkdir(parents=True, exist_ok=True)
         
         timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
