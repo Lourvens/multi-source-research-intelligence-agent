@@ -47,7 +47,9 @@ class DocumentProcessor:
         include_full_text: bool = False,
         max_documents: Optional[int] = None,
         batch_size: int = 32,
-        save_to_disk: bool = True
+        save_to_disk: bool = True,
+        save_to_vector_store: bool = False,
+        collection_name: str = None
     ) -> List[Document]:
         """
         Run complete pipeline: Load → Chunk → Embed → Save
@@ -57,6 +59,8 @@ class DocumentProcessor:
             max_documents: Limit number of documents (for testing)
             batch_size: Batch size for embedding generation
             save_to_disk: Whether to save processed chunks to data/processed/
+            save_to_vector_store: Whether to save to ChromaDB vector store
+            collection_name: Optional collection name for vector store
             
         Returns:
             List of Document objects with embeddings in metadata
@@ -104,12 +108,36 @@ class DocumentProcessor:
                     exc_info=exc
                 )
         
+        # Step 5: Save to vector store (optional)
+        if save_to_vector_store and embedded_chunks:
+            try:
+                from src.vector_store import ChromaVectorStore
+                
+                vector_store = ChromaVectorStore(collection_name=collection_name)
+                vector_store.create_from_documents(
+                    embedded_chunks,
+                    collection_name=collection_name
+                )
+                logger.info(
+                    "Saved documents to vector store",
+                    extra={
+                        "num_documents": len(embedded_chunks),
+                        "collection_name": collection_name or "default"
+                    }
+                )
+            except Exception as exc:
+                logger.warning(
+                    "Failed to save to vector store (continuing anyway)",
+                    exc_info=exc
+                )
+        
         logger.info(
             "Document processing pipeline completed",
             extra={
                 "input_documents": len(documents),
                 "output_chunks": len(embedded_chunks),
-                "saved_to_disk": save_to_disk
+                "saved_to_disk": save_to_disk,
+                "saved_to_vector_store": save_to_vector_store
             }
         )
         
