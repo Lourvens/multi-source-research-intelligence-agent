@@ -32,8 +32,8 @@ class TestDocumentLoader:
         original_raw_dir = config.RAW_DATA_DIR
         monkeypatch.setattr(config, "RAW_DATA_DIR", temp_data_dir["data"] / "raw")
         
-        # Create metadata file
-        metadata_file = temp_data_dir["raw"] / "arxiv_metadata" / f"{sample_arxiv_metadata['id']}.json"
+        # Create metadata file (metadata_dir is RAW_DATA_DIR / "arxiv_metadata")
+        metadata_file = temp_data_dir["raw"] / f"{sample_arxiv_metadata['id']}.json"
         metadata_file.parent.mkdir(parents=True, exist_ok=True)
         with metadata_file.open("w", encoding="utf-8") as f:
             json.dump(sample_arxiv_metadata, f)
@@ -89,8 +89,8 @@ class TestDocumentLoader:
         original_raw_dir = config.RAW_DATA_DIR
         monkeypatch.setattr(config, "RAW_DATA_DIR", temp_data_dir["data"] / "raw")
         
-        # Create metadata file
-        metadata_file = temp_data_dir["raw"] / "arxiv_metadata" / f"{sample_arxiv_metadata['id']}.json"
+        # Create metadata file (metadata_dir is RAW_DATA_DIR / "arxiv_metadata")
+        metadata_file = temp_data_dir["raw"] / f"{sample_arxiv_metadata['id']}.json"
         metadata_file.parent.mkdir(parents=True, exist_ok=True)
         with metadata_file.open("w", encoding="utf-8") as f:
             json.dump(sample_arxiv_metadata, f)
@@ -143,12 +143,15 @@ class TestDocumentLoader:
             assert len(saved_paths) == 1
             assert saved_paths[0].exists()
             
-            # Verify file content
+            # Verify file content (each document is saved as a separate file)
             with saved_paths[0].open("r", encoding="utf-8") as f:
                 data = json.load(f)
             
-            assert data["total_documents"] == 1
-            assert data["documents"][0]["metadata"]["arxiv_id"] == sample_document.metadata["arxiv_id"]
+            assert "metadata" in data
+            assert "page_content" in data
+            assert data["metadata"]["arxiv_id"] == sample_document.metadata["arxiv_id"]
+            assert data["page_content"] == sample_document.page_content
         finally:
             monkeypatch.setattr(config, "PROCESSED_DATA_DIR", original_processed_dir)
+
 

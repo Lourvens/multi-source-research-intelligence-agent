@@ -61,10 +61,8 @@ class TestDocumentChunker:
     
     def test_chunk_document_invalid_strategy(self):
         """Test chunking with invalid strategy."""
-        chunker = DocumentChunker(strategy="invalid")
-        
         with pytest.raises(ValueError, match="Unknown strategy"):
-            chunker._init_splitter()
+            DocumentChunker(strategy="invalid")
     
     def test_add_chunk_metadata(self, sample_document):
         """Test adding chunk metadata."""
@@ -105,4 +103,5 @@ class TestDocumentChunker:
         # Plus chunk-specific metadata
         assert "chunk_id" in chunk.metadata
         assert "chunk_index" in chunk.metadata
+
 

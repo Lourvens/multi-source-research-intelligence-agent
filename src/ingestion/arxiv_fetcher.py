@@ -131,6 +131,11 @@ def batch_fetch_arxiv_metadata(
     )
 
   flat_metadata = [item for batch in metadata for item in batch]
+  
+  # Apply max_results limit if specified
+  if max_results is not None and len(flat_metadata) > max_results:
+    flat_metadata = flat_metadata[:max_results]
+  
   logger.info(
     "Completed batched ArXiv fetch",
     extra={

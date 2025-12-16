@@ -107,7 +107,12 @@ class TestBatchFetchArxivMetadata:
     @patch('src.ingestion.arxiv_fetcher.ArxivFetcher')
     def test_batch_fetch_max_results(self, mock_fetcher):
         """Test batch fetching with max_results limit."""
-        mock_fetcher.return_value = [{"id": f"1808.0159{i}v1"} for i in range(10)]
+        # Mock ArxivFetcher to return 10 items each time
+        mock_fetcher.side_effect = [
+            [{"id": f"1808.0159{i}v1"} for i in range(10)],
+            [{"id": f"1808.0160{i}v1"} for i in range(10)],
+            [{"id": f"1808.0161{i}v1"} for i in range(10)],
+        ]
         
         result = batch_fetch_arxiv_metadata(
             num_batches=None,
@@ -133,7 +138,11 @@ class TestSaveMetadatas:
             save_metadatas([sample_arxiv_metadata])
             
             # Verify file was created
-            metadata_file = temp_data_dir["raw"] / "arxiv_metadata" / f"{sample_arxiv_metadata['id']}.json"
+            # save_metadatas saves to RAW_DATA_DIR / "arxiv_metadata" / f"{id}.json"
+            # Since RAW_DATA_DIR is patched to temp_data_dir["data"] / "raw"
+            # The file is at temp_data_dir["data"] / "raw" / "arxiv_metadata" / f"{id}.json"
+            # Which is temp_data_dir["raw"] / f"{id}.json"
+            metadata_file = temp_data_dir["raw"] / f"{sample_arxiv_metadata['id']}.json"
             assert metadata_file.exists()
             
             # Verify content
@@ -158,4 +167,5 @@ class TestSaveMetadatas:
             save_metadatas([invalid_metadata])
         finally:
             monkeypatch.setattr(config, "RAW_DATA_DIR", original_raw_dir)
+
 

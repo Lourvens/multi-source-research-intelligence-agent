@@ -40,6 +40,7 @@ def sample_arxiv_metadata() -> Dict:
         "authors": ["Pankaj Gupta", "Hinrich Schütze"],
         "published": "2018-08-05T00:00:00Z",
         "updated": "2018-08-05T00:00:00Z",
+        "links": ["https://arxiv.org/abs/1808.01591v1", "https://arxiv.org/pdf/1808.01591v1.pdf"],
         "categories": ["cs.CL", "cs.AI"],
         "pdf_url": "https://arxiv.org/pdf/1808.01591v1.pdf",
         "fetched_at": "2024-01-15T10:00:00Z",
@@ -72,6 +73,7 @@ Abstract:
             "title": sample_arxiv_metadata["title"],
             "authors": sample_arxiv_metadata["authors"],
             "published": sample_arxiv_metadata["published"],
+            "pdf_url": sample_arxiv_metadata["pdf_url"],
             "source": "arxiv",
             "content_type": "abstract_only"
         }

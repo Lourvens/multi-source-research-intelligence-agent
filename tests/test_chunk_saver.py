@@ -139,3 +139,4 @@ class TestLoadProcessedChunks:
         with pytest.raises(Exception):
             load_processed_chunks(nonexistent_path)
 
+

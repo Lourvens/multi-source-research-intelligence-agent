@@ -114,3 +114,4 @@ class TestProcessArxivAbstracts:
         call_kwargs = mock_processor_class.call_args[1]
         assert call_kwargs["chunk_strategy"] == CHUNK_STRATEGY_NONE
 
+
