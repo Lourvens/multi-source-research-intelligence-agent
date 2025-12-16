@@ -30,7 +30,7 @@ class DocumentProcessor:
     def __init__(
         self,
         embedding_model: str = DEFAULT_EMBEDDING_MODEL,
-        chunk_strategy: str | ChunkingStrategy = ChunkingStrategy.NONE,
+        chunk_strategy: str | ChunkingStrategy = ChunkingStrategy.RECURSIVE,
         chunk_size: int = 512,
         chunk_overlap: int = 50
     ):

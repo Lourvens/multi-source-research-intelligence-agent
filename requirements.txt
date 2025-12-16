@@ -22,6 +22,8 @@ openai
 python-dotenv
 tiktoken
 pydantic
+pydantic-settings
+numpy
 
 # Processing
 beautifulsoup4
