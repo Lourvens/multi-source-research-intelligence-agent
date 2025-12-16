@@ -10,7 +10,12 @@ from src.ingestion.document_loader import DocumentLoader
 from src.embedding.chunking import DocumentChunker
 from src.embedding.embedder import DocumentEmbedder
 from src.embedding.chunk_saver import save_processed_chunks
-from src.constants import ChunkingStrategy, CHUNK_STRATEGY_NONE, DATA_SOURCE_ARXIV
+from src.constants import (
+    ChunkingStrategy,
+    CHUNK_STRATEGY_NONE,
+    DATA_SOURCE_ARXIV,
+    DEFAULT_EMBEDDING_MODEL,
+)
 from src.utils.logging_config import setup_logging
 from pathlib import Path
 
@@ -24,7 +29,7 @@ class DocumentProcessor:
     
     def __init__(
         self,
-        embedding_model: str = "all-MiniLM-L6-v2",
+        embedding_model: str = DEFAULT_EMBEDDING_MODEL,
         chunk_strategy: str | ChunkingStrategy = ChunkingStrategy.NONE,
         chunk_size: int = 512,
         chunk_overlap: int = 50
@@ -155,7 +160,7 @@ def process_arxiv_abstracts(max_documents: Optional[int] = None) -> List[Documen
         List of embedded documents ready for vector store
     """
     processor = DocumentProcessor(
-        embedding_model="all-MiniLM-L6-v2",
+        embedding_model=DEFAULT_EMBEDDING_MODEL,
         chunk_strategy=CHUNK_STRATEGY_NONE  # No chunking for abstracts
     )
     

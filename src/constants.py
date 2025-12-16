@@ -62,3 +62,7 @@ DATA_SOURCE_PATENTS = DataSource.PATENTS.value
 PROCESSED_CHUNKS_SUBDIR = "chunks"
 PROCESSED_DOCUMENTS_SUBDIR = "documents"
 
+# Embedding model constants
+DEFAULT_EMBEDDING_MODEL = "all-MiniLM-L6-v2"
+SENTENCE_TRANSFORMERS_PREFIX = "sentence-transformers/"
+

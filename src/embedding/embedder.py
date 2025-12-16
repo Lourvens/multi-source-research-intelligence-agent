@@ -7,6 +7,7 @@ from langchain_classic.schema import Document
 from langchain_community.embeddings import HuggingFaceEmbeddings
 
 from src.utils.logging_config import setup_logging
+from src.constants import DEFAULT_EMBEDDING_MODEL, SENTENCE_TRANSFORMERS_PREFIX
 from pathlib import Path
 
 logger = setup_logging("embedder", log_dir=Path("logs") / "embedding")
@@ -17,17 +18,17 @@ class DocumentEmbedder:
     Generate embeddings for documents using HuggingFace models.
     """
     
-    def __init__(self, model_name: str = "all-MiniLM-L6-v2"):
+    def __init__(self, model_name: str = DEFAULT_EMBEDDING_MODEL):
         """
         Initialize the embedder with a specific model.
         
         Args:
             model_name: Name of the HuggingFace embedding model.
-                Default: "all-MiniLM-L6-v2" (sentence-transformers)
+                Default: DEFAULT_EMBEDDING_MODEL (sentence-transformers)
         """
         # Construct full model path for sentence-transformers
-        if not model_name.startswith("sentence-transformers/"):
-            model_name = f"sentence-transformers/{model_name}"
+        if not model_name.startswith(SENTENCE_TRANSFORMERS_PREFIX):
+            model_name = f"{SENTENCE_TRANSFORMERS_PREFIX}{model_name}"
         
         self.model_name = model_name
         

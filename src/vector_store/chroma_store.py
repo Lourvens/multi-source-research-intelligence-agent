@@ -14,7 +14,11 @@ from langchain_community.embeddings import HuggingFaceEmbeddings
 
 from src import config
 from src.utils.logging_config import setup_logging
-from src.constants import DATA_SOURCE_ARXIV
+from src.constants import (
+    DATA_SOURCE_ARXIV,
+    DEFAULT_EMBEDDING_MODEL,
+    SENTENCE_TRANSFORMERS_PREFIX,
+)
 
 logger = setup_logging("chroma_store", log_dir=Path("logs") / "vector_store")
 
@@ -34,7 +38,7 @@ class ChromaVectorStore:
         self,
         collection_name: str = None,
         persist_directory: str | Path = None,
-        embedding_model: str = "all-MiniLM-L6-v2",
+        embedding_model: str = DEFAULT_EMBEDDING_MODEL,
     ):
         """
         Initialize ChromaDB vector store.
@@ -45,15 +49,15 @@ class ChromaVectorStore:
             persist_directory: Directory to persist the vector store.
                 Defaults to config.VECTOR_DB_DIR
             embedding_model: Embedding model name for HuggingFace.
-                Defaults to "all-MiniLM-L6-v2"
+                Defaults to DEFAULT_EMBEDDING_MODEL
         """
         self.collection_name = collection_name or config.COLLECTION_NAME
         self.persist_directory = Path(persist_directory or config.VECTOR_DB_DIR)
         self.persist_directory.mkdir(parents=True, exist_ok=True)
         
         # Initialize embedding model
-        if not embedding_model.startswith("sentence-transformers/"):
-            embedding_model = f"sentence-transformers/{embedding_model}"
+        if not embedding_model.startswith(SENTENCE_TRANSFORMERS_PREFIX):
+            embedding_model = f"{SENTENCE_TRANSFORMERS_PREFIX}{embedding_model}"
         
         self.embedding_model = embedding_model
         self.embeddings = HuggingFaceEmbeddings(
