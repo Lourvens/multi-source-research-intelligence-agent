@@ -123,10 +123,6 @@ pytest tests/ --cov=src --cov-report=html
 
 This is a learning project. See [AGENT.md](AGENT.md) for architectural guidelines.
 
-## 📝 License
-
-MIT License - See LICENSE file for details
-
 ## 🙏 Acknowledgments
 
 Built with:
