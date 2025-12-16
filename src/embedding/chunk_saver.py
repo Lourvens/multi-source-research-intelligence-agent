@@ -39,8 +39,8 @@ def save_processed_chunks(
         logger.warning("No chunks to save")
         return None
     
-    # Create output directory
-    output_dir = config.PROCESSED_DATA_DIR / source_str
+    # Create output directory (in chunks subfolder)
+    output_dir = config.PROCESSED_DATA_DIR / source_str / "chunks"
     output_dir.mkdir(parents=True, exist_ok=True)
     
     # Generate filename with timestamp
